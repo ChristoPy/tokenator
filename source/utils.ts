@@ -20,7 +20,7 @@ const Base64 = Base64Module.Base64;
  */
 const Configure = (Key) => new BlowFish (Key, BlowFish.MODE.ECB, BlowFish.PADDING.NULL);
 
-
+const ValidadeToken = (Expiration) => Date.now () < new Date (Expiration).getTime ();
 
 /**
  * Encode the recived Token based on a given key.
@@ -39,13 +39,12 @@ export function Encode (Token, Key):String {
 	return Base64.encodeURI (BF.encode (Base64Token));
 }
 
-
 /**
  * Decode the received Token based on a given key.
  *
  * @return {String}
  */
-export function Decode (PublicBase64, Key):String {
+function Decode (PublicBase64, Key):String {
 
 	// Create a new BlowFish instance and configure it.
 	const BF = Configure (Key);
@@ -58,4 +57,11 @@ export function Decode (PublicBase64, Key):String {
 
 	// Decode the new Base64 and return your Object representation.
 	return JSON.parse (Base64.decode (DecodedBase64Token));
+}
+
+export function Validate (PublicBase64, Key):boolean {
+
+	const DecodedToken = Decode (PublicBase64, Key);
+
+	return ValidadeToken (DecodedToken.Expiration);
 }

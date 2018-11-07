@@ -1,3 +1,6 @@
+/**
+ * Imports
+ */
 import * as nanoid from "nanoid";
 
 
@@ -13,6 +16,6 @@ export default class Token {
 		this.Id = nanoid (256);
 		this.Creation = Date.now ();
 		this.Data = Data;
-		this.Expiration = new Date (Expiration).getTime ();
+		this.Expiration = new Date (Expiration).getTime () || new Date ().setDate (new Date ().getDate () + 1);
 	}
 }
