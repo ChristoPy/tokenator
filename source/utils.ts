@@ -27,13 +27,16 @@ const Configure = (Key) => new BlowFish (Key, BlowFish.MODE.ECB, BlowFish.PADDIN
  *
  * @return {String}
  */
-export function Encode (ToEncode, Key):String {
+export function Encode (Token, Key):String {
 
 	// Create a new BlowFish instance and configure it.
 	const BF = Configure (Key);
 
+	// Create a Base64 from a JSON representation of the Token.
+	const Base64Token = Base64.encodeURI (JSON.stringify (Token));
+
 	// Return the encoded Token as a base64 string.
-	return Base64.encodeURI (BF.encode (ToEncode));
+	return Base64.encodeURI (BF.encode (Base64Token));
 }
 
 
@@ -42,13 +45,17 @@ export function Encode (ToEncode, Key):String {
  *
  * @return {String}
  */
-export function Decode (ToDecode, Key):String {
+export function Decode (PublicBase64, Key):String {
 
 	// Create a new BlowFish instance and configure it.
 	const BF = Configure (Key);
 
-	const DecodedBase64 = Base64.decode (ToDecode);
+	// Decode the Base64 string of the Token.
+	const DecodedBase64 = Base64.decode (PublicBase64);
 
-	// Return the decoded Token as a string.
-	return BF.decode (new Uint8Array (Array.from (DecodedBase64.split (","))));
+	// Decode the decoded Base64 as a new Base64.
+	const DecodedBase64Token = BF.decode (new Uint8Array (Array.from (DecodedBase64.split (","))));
+
+	// Decode the new Base64 and return your Object representation.
+	return JSON.parse (Base64.decode (DecodedBase64Token));
 }
