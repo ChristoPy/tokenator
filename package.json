@@ -20,6 +20,7 @@
   "dependencies": {
     "egoroof-blowfish": "^2.1.0",
     "hash.js": "^1.1.5",
+    "js-base64": "^2.4.9",
     "nanoid": "^2.0.0"
   },
   "devDependencies": {

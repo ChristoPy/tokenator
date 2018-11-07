@@ -1,9 +1,16 @@
 /**
- * BlowFish package for data encryption.
+ * Imports
+ */
+import * as BlowFish from "egoroof-blowfish";
+import * as Base64Module from "js-base64";
+
+
+/**
+ * Get the Base64 functionality.
  *
  * @var {Object}
  */
-const BlowFish = require ("egoroof-blowfish");
+const Base64 = Base64Module.Base64;
 
 
 /**
@@ -14,15 +21,19 @@ const BlowFish = require ("egoroof-blowfish");
 const Configure = (Key) => new BlowFish (Key, BlowFish.MODE.ECB, BlowFish.PADDING.NULL);
 
 
+
 /**
  * Encode the recived Token based on a given key.
  *
- * @return {Uint8Array}
+ * @return {String}
  */
-export function Encode (ToEncode, Key):Uint8Array {
+export function Encode (ToEncode, Key):String {
 
+	// Create a new BlowFish instance and configure it.
 	const BF = Configure (Key);
-	return BF.encode (ToEncode);
+
+	// Return the encoded Token as a base64 string.
+	return Base64.encodeURI (BF.encode (ToEncode));
 }
 
 
@@ -33,6 +44,11 @@ export function Encode (ToEncode, Key):Uint8Array {
  */
 export function Decode (ToDecode, Key):String {
 
+	// Create a new BlowFish instance and configure it.
 	const BF = Configure (Key);
-	return BF.decode (ToDecode, BlowFish.TYPE.STRING);
+
+	const DecodedBase64 = Base64.decode (ToDecode);
+
+	// Return the decoded Token as a string.
+	return BF.decode (new Uint8Array (Array.from (DecodedBase64.split (","))));
 }
