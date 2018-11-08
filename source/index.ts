@@ -10,13 +10,14 @@ import * as FileSync from "lowdb/adapters/FileSync";
 /**
  * Configure the database.
  */
-const DataBase = new LowDB (new FileSync ("./data.json"));
+const DataBase = new LowDB (new FileSync ("./tokens.json"));
+DataBase.defaults ({valid: [], invalid: []}).write ();
 
 
 /**
  * Main Tokenator class.
  */
-export default class Tokenator {
+class Tokenator {
 
 	/**
 	 * Create a new Token
@@ -82,3 +83,5 @@ export default class Tokenator {
 		}
 	}
 }
+
+export = new Tokenator ();

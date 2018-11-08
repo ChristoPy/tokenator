@@ -1,5 +1,4 @@
 "use strict";
-exports.__esModule = true;
 /**
  * Imports
  */
@@ -71,4 +70,4 @@ var Tokenator = /** @class */ (function () {
     };
     return Tokenator;
 }());
-exports["default"] = Tokenator;
+module.exports = new Tokenator();
