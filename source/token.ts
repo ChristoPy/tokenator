@@ -7,7 +7,7 @@ import * as nanoid from "nanoid";
 /**
  * Main Token class.
  */
-class Token {
+export default class Token {
 
 	/**
 	 * The Token id.
