@@ -5,6 +5,7 @@ import * as BlowFish from "egoroof-blowfish";
 import * as Base64Module from "js-base64";
 
 
+
 /**
  * Get the Base64 functionality.
  *
@@ -20,7 +21,14 @@ const Base64 = Base64Module.Base64;
  */
 const Configure = (Key) => new BlowFish (Key, BlowFish.MODE.ECB, BlowFish.PADDING.NULL);
 
+/**
+ * Validate a received Token
+ *
+ * @var {Date}
+ */
 const ValidadeToken = (Expiration) => Date.now () < new Date (Expiration).getTime ();
+
+
 
 /**
  * Encode the recived Token based on a given key.
@@ -33,7 +41,12 @@ export function Encode (Token, Key):String {
 	const BF = Configure (Key);
 
 	// Create a Base64 from a JSON representation of the Token.
-	const Base64Token = Base64.encodeURI (JSON.stringify (Token));
+	const Base64Token = Base64.encodeURI (JSON.stringify ({
+		i: Token.Id,
+		c: Token.Creation,
+		d: Token.Data,
+		e: Token.Expiration
+	}));
 
 	// Return the encoded Token as a base64 string.
 	return Base64.encodeURI (BF.encode (Base64Token));
@@ -52,16 +65,22 @@ function Decode (PublicBase64, Key):String {
 	// Decode the Base64 string of the Token.
 	const DecodedBase64 = Base64.decode (PublicBase64);
 
-	// Decode the decoded Base64 as a new Base64.
-	const DecodedBase64Token = BF.decode (new Uint8Array (Array.from (DecodedBase64.split (","))));
+	// Turn the decoded Base64 into an Uint8Array and decode it with BlowFish.
+	const DecodedBase64Token = BF.decode (new Uint8Array (DecodedBase64.split (",")));
 
-	// Decode the new Base64 and return your Object representation.
-	return JSON.parse (Base64.decode (DecodedBase64Token));
+	// Decode the Token and turn it into an Object.
+	const DecodedToken = JSON.parse (Base64.decode (DecodedBase64Token));
+
+	// Return an representation of the Token.
+	return {
+		Id: DecodedToken.i,
+		Creation: DecodedToken.c,
+		Data: DecodedToken.d,
+		Expiration: DecodedToken.e
+	} as any;
 }
 
 export function Validate (PublicBase64, Key):boolean {
 
-	const DecodedToken = Decode (PublicBase64, Key);
-
-	return ValidadeToken (DecodedToken.Expiration);
+	return ValidadeToken (Decode (PublicBase64, Key)["Expiration"]);
 }
