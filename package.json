@@ -1,5 +1,5 @@
 {
-  "name": "tokenator",
+  "name": "@christopy/tokenator",
   "version": "1.0.0",
   "description": "Generate tokens easily",
   "main": "distribution/index.js",
@@ -12,14 +12,12 @@
     "auth",
     "JWT",
     "web token",
-    "tokens",
-    "hash"
+    "tokens"
   ],
   "author": "Christopher Ribeiro <christo_campiglia@hotmail.com>",
   "license": "MIT",
   "dependencies": {
     "egoroof-blowfish": "^2.1.0",
-    "hash.js": "^1.1.5",
     "js-base64": "^2.4.9",
     "lowdb": "^1.0.0",
     "nanoid": "^2.0.0"
