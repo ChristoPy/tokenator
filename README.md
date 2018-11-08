@@ -1,7 +1,6 @@
-<div style="text-align: center; margin: 30px 0;"><img src="tokenator.svg" alt="chainDB" style="max-width: 80%;"/></div>
-
-<div style="text-align: center; margin-bottom: 20px;">
-Create tokens easily.
+<div style="text-align: center">
+	<img src="tokenator.svg" style="margin-bottom: 20px" alt="tokenator"/><br>
+	Create tokens easily.
 </div>
 
 
@@ -21,8 +20,9 @@ The returned data is used after to check the Token
 const myNewToken = Tokenator.Create ({
     data: "I'm a precious data", // The Token data
     expiration: "05/04/2019",    // When the Token expires (default is 24H)
-    key: "A super secure key"    // The key for the Token encryption (required)
-});
+  },
+  "A super secure key"           // The key for the Token encryption (required)
+);
 ```
 
 ## Checking Tokens
@@ -31,7 +31,7 @@ If the Id is wrong or the key couldn't decrypt the Token correctly, it returns `
 If the Token is invalid or doesn't exists, it returns ```false```.
 If the Token is valid, it returns ```true```.
 ```js
-Tokenator.Check (id);
+Tokenator.Check (myNewToken, "A super secure key");
 ```
 
 ## Why web tokens?

@@ -1,7 +1,7 @@
 {
   "name": "@christopy/tokenator",
-  "version": "1.0.0",
-  "description": "Generate tokens easily",
+  "version": "1.0.3",
+  "description": "Create tokens easily.",
   "main": "distribution/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
