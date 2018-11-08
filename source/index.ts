@@ -2,7 +2,7 @@
  * Imports
  */
 import Token from "./token";
-import * as Utils from "./utils";
+import * as Utils from "./utils/utils";
 import * as LowDB from "lowdb";
 import * as FileSync from "lowdb/adapters/FileSync";
 

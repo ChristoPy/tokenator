@@ -1,4 +1,4 @@
-const Utils = require ("./../distribution/utils.js");
+const Utils = require ("./../distribution/utils/utils.js");
 const Token = require ("./../distribution/token.js")["default"];
 
 
@@ -67,9 +67,6 @@ console.log ();
 
 
 
-/**
- * @todo Handle the exception and return false for wrong keys.
- */
 IsValid = Utils.Validate (EncodedToken, "i'm a wrong key!");
 
-console.log (IsValid); // error
+console.log (IsValid);

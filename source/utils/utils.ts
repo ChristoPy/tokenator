@@ -68,19 +68,28 @@ function Decode (PublicBase64, Key):String {
 	// Turn the decoded Base64 into an Uint8Array and decode it with BlowFish.
 	const DecodedBase64Token = BF.decode (new Uint8Array (DecodedBase64.split (",")));
 
-	// Decode the Token and turn it into an Object.
-	const DecodedToken = JSON.parse (Base64.decode (DecodedBase64Token));
+	try {
+		const DecodedToken = JSON.parse (Base64.decode (DecodedBase64Token));
 
-	// Return an representation of the Token.
-	return {
-		Id: DecodedToken.i,
-		Creation: DecodedToken.c,
-		Data: DecodedToken.d,
-		Expiration: DecodedToken.e
-	} as any;
+		// Return an representation of the Token.
+		return {
+			Id: DecodedToken.i,
+			Creation: DecodedToken.c,
+			Data: DecodedToken.d,
+			Expiration: DecodedToken.e
+		} as any;
+	} catch (error) {
+		return null;	
+	}
 }
 
-export function Validate (PublicBase64, Key):boolean {
+export function Validate (PublicBase64, Key):any {
 
-	return ValidadeToken (Decode (PublicBase64, Key)["Expiration"]);
+	const DecodedToken = Decode (PublicBase64, Key);
+
+	if (DecodedToken) {
+		return ValidadeToken (DecodedToken["Expiration"]);
+	} else {
+		return null;
+	}
 }
