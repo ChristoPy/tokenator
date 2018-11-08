@@ -5,7 +5,7 @@ const Token = require ("./../distribution/token.js")["default"];
 const KEY = "this is a very strong key, okay?";
 
 
-const ValidToken = new Token ({
+let ValidToken = new Token ({
 	test: "a simple test"
 });
 
@@ -28,7 +28,7 @@ console.log ();
 
 
 
-const InvalidToken = new Token ({
+let InvalidToken = new Token ({
 	test: "another simple test"
 }, new Date ().setDate (new Date ().getDate () - 1)); // Get yesterday.
 
@@ -47,3 +47,29 @@ console.log ();
 IsValid = Utils.Validate (EncodedToken, KEY);
 
 console.log (IsValid); // false
+console.log ();
+
+
+
+ValidToken = new Token ({
+	test: "another simple test"
+});
+
+console.log (InvalidToken);
+console.log ();
+
+
+
+EncodedToken = Utils.Encode (InvalidToken, KEY);
+
+console.log (EncodedToken);
+console.log ();
+
+
+
+/**
+ * @todo Handle the exception and return false for wrong keys.
+ */
+IsValid = Utils.Validate (EncodedToken, "i'm a wrong key!");
+
+console.log (IsValid); // error
