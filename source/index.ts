@@ -13,7 +13,10 @@ import * as FileSync from "lowdb/adapters/FileSync";
 const DataBase = new LowDB (new FileSync ("./data.json"));
 
 
-class Tokenator {
+/**
+ * Main Tokenator class.
+ */
+export default class Tokenator {
 
 	/**
 	 * Create a new Token

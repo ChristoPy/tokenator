@@ -83,10 +83,18 @@ function Decode (PublicBase64, Key):String {
 	}
 }
 
+/**
+ * Validate a Token by your Id.
+ *
+ * @return {any}
+ */
 export function Validate (PublicBase64, Key):any {
 
+	// Try decode the Token.
 	const DecodedToken = Decode (PublicBase64, Key);
 
+	// If it was decoded properly, check your expiration date and return it.
+	// Else, return null.
 	if (DecodedToken) {
 		return ValidadeToken (DecodedToken["Expiration"]);
 	} else {
