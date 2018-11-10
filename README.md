@@ -1,7 +1,6 @@
-<div style="text-align: center">
-	<img src="tokenator.svg" style="margin-bottom: 20px" alt="tokenator"/><br>
-	Create tokens easily.
-</div>
+<img src="tokenator.svg" style="margin: 0 auto; display: block;" alt="tokenator"/>
+<div style="text-align: center; margin-top: 20px; bottom: 40px;">Create tokens easily.</div>
+
 
 
 ## Installation
@@ -38,4 +37,4 @@ Tokenator.Check (myNewToken, "A super secure key");
 Sometimes to learn something you need make your own implementation.
 
 ## Version
-1.0.0
+1.0.4

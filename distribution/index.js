@@ -9,7 +9,8 @@ var FileSync = require("lowdb/adapters/FileSync");
 /**
  * Configure the database.
  */
-var DataBase = new LowDB(new FileSync("./data.json"));
+var DataBase = new LowDB(new FileSync("./tokens.json"));
+DataBase.defaults({ valid: [], invalid: [] }).write();
 /**
  * Main Tokenator class.
  */
@@ -50,9 +51,9 @@ var Tokenator = /** @class */ (function () {
             if (Token_1) {
                 // Check if is valid.
                 var IsValid = Utils.Validate(Token_1.token, Key);
-                // Return true is be valid.
+                // Return the Token if it be valid.
                 if (IsValid) {
-                    return true;
+                    return IsValid;
                 }
                 else {
                     // Remove as valid and add to the invalid Array.

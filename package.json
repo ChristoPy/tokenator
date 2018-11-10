@@ -1,6 +1,6 @@
 {
   "name": "@christopy/tokenator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Create tokens easily.",
   "main": "distribution/index.js",
   "scripts": {

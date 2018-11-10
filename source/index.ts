@@ -63,9 +63,9 @@ class Tokenator {
 				// Check if is valid.
 				const IsValid = Utils.Validate (Token.token, Key);
 
-				// Return true is be valid.
+				// Return the Token if it be valid.
 				if (IsValid) {
-					return true;
+					return IsValid;
 				} else {
 
 					// Remove as valid and add to the invalid Array.

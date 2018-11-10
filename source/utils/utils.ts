@@ -95,8 +95,8 @@ export function Validate (PublicBase64, Key):any {
 
 	// If it was decoded properly, check your expiration date and return it.
 	// Else, return null.
-	if (DecodedToken) {
-		return ValidadeToken (DecodedToken["Expiration"]);
+	if (DecodedToken && ValidadeToken (DecodedToken["Expiration"])) {
+		return DecodedToken["Data"];
 	} else {
 		return null;
 	}
